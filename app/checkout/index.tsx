@@ -1,10 +1,12 @@
+import { Link } from "expo-router";
 import React from "react";
 import { View, Text } from "react-native";
 
 export default function PersonalDetails() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Personal Details</Text>
+    <View>
+      <Text style={{ fontSize: 30 }}>Personal Details</Text>
+      <Link href={"/checkout/delivery"}>Next</Link>
     </View>
   );
 }
