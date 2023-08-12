@@ -1,9 +1,14 @@
 import { Slot } from "expo-router";
-import { PaperProvider } from "react-native-paper";
+import { PaperProvider, MD3LightTheme } from "react-native-paper";
+
+const theme = {
+  ...MD3LightTheme,
+  roundness: 1,
+};
 
 export default function RootLayout() {
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <Slot />
     </PaperProvider>
   );
