@@ -23,7 +23,7 @@ export default function CheckoutStack() {
         />
         <Stack.Screen
           name="payment"
-          options={{ title: "Paymentl Information" }}
+          options={{ title: "Payment Information" }}
         />
       </Stack>
     </>
