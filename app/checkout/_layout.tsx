@@ -13,18 +13,9 @@ export default function CheckoutStack() {
           headerTintColor: "#F0EBF8",
         }}
       >
-        <Stack.Screen
-          name="index"
-          options={{ title: "Personal Information" }}
-        />
-        <Stack.Screen
-          name="delivery"
-          options={{ title: "Delivery Information" }}
-        />
-        <Stack.Screen
-          name="payment"
-          options={{ title: "Payment Information" }}
-        />
+        <Stack.Screen name="index" options={{ title: "Personal Info" }} />
+        <Stack.Screen name="delivery" options={{ title: "Delivery Info" }} />
+        <Stack.Screen name="payment" options={{ title: "Payment Info" }} />
       </Stack>
     </>
   );

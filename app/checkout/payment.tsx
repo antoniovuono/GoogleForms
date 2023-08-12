@@ -9,6 +9,7 @@ export default function PaymentDetails() {
   const nextPage = () => {
     //Submit:
 
+    //Todo: Why is not navigating home
     router.push("/");
   };
 
