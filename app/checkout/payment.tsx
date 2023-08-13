@@ -1,7 +1,13 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import { Button, Card, TextInput, useTheme } from "react-native-paper";
+import {
+  Button,
+  Card,
+  TextInput,
+  useTheme,
+  Checkbox,
+} from "react-native-paper";
 
 export default function PaymentDetails() {
   const router = useRouter();
@@ -15,7 +21,15 @@ export default function PaymentDetails() {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ gap: 10 }}>
+    <ScrollView
+      contentContainerStyle={{
+        gap: 10,
+        maxWidth: 500,
+        width: "100%",
+        alignSelf: "center",
+      }}
+      showsVerticalScrollIndicator={false}
+    >
       <Card>
         <Card.Title title="Payment details" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
@@ -35,6 +49,8 @@ export default function PaymentDetails() {
               style={{ backgroundColor: theme.colors.background, flex: 2 }}
             />
           </View>
+
+          <Checkbox.Item label="Save payment information" status="checked" />
         </Card.Content>
       </Card>
 

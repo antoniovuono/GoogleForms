@@ -21,7 +21,12 @@ export default function DeliveryDetails() {
 
   return (
     <ScrollView
-      contentContainerStyle={{ gap: 15 }}
+      contentContainerStyle={{
+        gap: 10,
+        maxWidth: 500,
+        width: "100%",
+        alignSelf: "center",
+      }}
       showsVerticalScrollIndicator={false}
     >
       <Card>
