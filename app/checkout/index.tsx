@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
-import { View, Text } from "react-native";
+import { ScrollView } from "react-native";
 import { Button, Card, TextInput, useTheme } from "react-native-paper";
 
 export default function PersonalDetails() {
@@ -12,7 +12,10 @@ export default function PersonalDetails() {
   };
 
   return (
-    <View style={{ gap: 15 }}>
+    <ScrollView
+      contentContainerStyle={{ gap: 15 }}
+      showsVerticalScrollIndicator={false}
+    >
       <Card>
         <Card.Title title="Personal Information" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
@@ -32,6 +35,6 @@ export default function PersonalDetails() {
       <Button mode="contained" onPress={nextPage}>
         Next
       </Button>
-    </View>
+    </ScrollView>
   );
 }
