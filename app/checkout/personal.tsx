@@ -1,13 +1,7 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { ScrollView, View } from "react-native";
-import {
-  Button,
-  Card,
-  TextInput,
-  useTheme,
-  HelperText,
-} from "react-native-paper";
+import { Button, Card, useTheme } from "react-native-paper";
 
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,9 +10,10 @@ import {
   PersonalInfo,
 } from "../../src/schema/checkout.schema";
 
+import ControlledInput from "../../src/components/ControlledInput";
+
 export default function PersonalDetails() {
   const router = useRouter();
-  const theme = useTheme();
 
   const {
     control,
@@ -27,8 +22,6 @@ export default function PersonalDetails() {
   } = useForm<PersonalInfo>({
     resolver: zodResolver(PersonalInfoSchema),
   });
-
-  console.log(errors);
 
   const nextPage = (data) => {
     console.log("Form Fields:", data);
@@ -49,34 +42,18 @@ export default function PersonalDetails() {
       <Card>
         <Card.Title title="Personal Information" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
-          <Controller
+          <ControlledInput
             control={control}
             name="name"
-            render={({
-              field: { value, onChange, onBlur },
-              fieldState: { error, invalid },
-            }) => (
-              <View>
-                <TextInput
-                  placeholder="Name"
-                  label="Name"
-                  style={{ backgroundColor: theme.colors.background }}
-                  value={value}
-                  onChangeText={onChange}
-                  onBlur={onBlur}
-                  error={invalid}
-                />
-                <HelperText type="error" visible={invalid}>
-                  {error?.message}
-                </HelperText>
-              </View>
-            )}
+            placeholder="Name"
+            label="Name"
           />
 
-          <TextInput
+          <ControlledInput
+            control={control}
+            name="email"
             placeholder="hey@gmail.com"
             label="Email"
-            style={{ backgroundColor: theme.colors.background }}
           />
         </Card.Content>
       </Card>
