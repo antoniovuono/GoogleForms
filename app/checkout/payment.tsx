@@ -1,34 +1,36 @@
 import { useRouter } from "expo-router";
 import React from "react";
 import { Controller, useForm } from "react-hook-form";
-import { ScrollView, View } from "react-native";
-import {
-  Button,
-  Card,
-  TextInput,
-  useTheme,
-  Checkbox,
-} from "react-native-paper";
+import { Alert, ScrollView, View } from "react-native";
+import { Button, Card, useTheme, Checkbox } from "react-native-paper";
 import {
   PaymentInfo,
   PaymentInfoSchema,
 } from "../../src/schema/payment.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ControlledInput from "../../src/components/ControlledInput";
+import { useCheckoutContext } from "../../src/contexts/CheckoutContenxt";
 
 export default function PaymentDetails() {
   const router = useRouter();
   const theme = useTheme();
+  const { setPayment, onSubmitAll } = useCheckoutContext();
 
   const { control, handleSubmit } = useForm<PaymentInfo>({
     resolver: zodResolver(PaymentInfoSchema),
   });
 
-  const nextPage = (data) => {
+  const nextPage = async (data: PaymentInfo) => {
     //Submit:
+    setPayment(data);
+    const success = await onSubmitAll();
 
-    //Todo: Why is not navigating home
-    router.push("/");
+    if (success) {
+      //Todo: Why is not navigating home
+      router.push("/");
+    } else {
+      Alert.alert("Failed to submit the form");
+    }
   };
 
   return (
@@ -49,7 +51,6 @@ export default function PaymentDetails() {
             name="number"
             label="Card number"
             placeholder="4242 4242 4242 4242"
-            style={{ backgroundColor: theme.colors.background }}
           />
           <View style={{ flexDirection: "row", gap: 15 }}>
             <ControlledInput

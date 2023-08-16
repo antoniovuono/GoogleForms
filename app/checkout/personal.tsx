@@ -11,9 +11,12 @@ import {
 } from "../../src/schema/checkout.schema";
 
 import ControlledInput from "../../src/components/ControlledInput";
+import { useCheckoutContext } from "../../src/contexts/CheckoutContenxt";
 
 export default function PersonalDetails() {
   const router = useRouter();
+
+  const { setPersonal } = useCheckoutContext();
 
   const {
     control,
@@ -23,7 +26,9 @@ export default function PersonalDetails() {
     resolver: zodResolver(PersonalInfoSchema),
   });
 
-  const nextPage = (data) => {
+  const nextPage = (data: PersonalInfo) => {
+    setPersonal(data);
+
     router.push("/checkout/delivery");
   };
 

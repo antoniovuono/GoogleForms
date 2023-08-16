@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 import {
@@ -16,11 +16,11 @@ import {
   DeliveryInfoSchema,
 } from "../../src/schema/delivery.schema";
 import ControlledInput from "../../src/components/ControlledInput";
+import { useCheckoutContext } from "../../src/contexts/CheckoutContenxt";
 
 export default function DeliveryDetails() {
-  const [shipping, setShipping] = useState("");
-
   const router = useRouter();
+  const { setDelivery } = useCheckoutContext();
 
   const { control, handleSubmit } = useForm<DeliveryInfo>({
     resolver: zodResolver(DeliveryInfoSchema),
@@ -29,7 +29,8 @@ export default function DeliveryDetails() {
     },
   });
 
-  const nextPage = (data) => {
+  const nextPage = (data: DeliveryInfo) => {
+    setDelivery(data);
     router.push("/checkout/payment");
   };
 
@@ -85,7 +86,7 @@ export default function DeliveryDetails() {
                 </HelperText>
                 <RadioButton.Group
                   value={value}
-                  onValueChange={(value) => setShipping(value)}
+                  onValueChange={(value) => onChange(value)}
                 >
                   <RadioButton.Item label="Free" value="free" />
                   <RadioButton.Item label="Fast" value="fast" />
