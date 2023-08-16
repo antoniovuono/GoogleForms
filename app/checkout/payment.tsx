@@ -1,5 +1,6 @@
 import { useRouter } from "expo-router";
 import React from "react";
+import { Controller, useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 import {
   Button,
@@ -8,12 +9,22 @@ import {
   useTheme,
   Checkbox,
 } from "react-native-paper";
+import {
+  PaymentInfo,
+  PaymentInfoSchema,
+} from "../../src/schema/payment.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ControlledInput from "../../src/components/ControlledInput";
 
 export default function PaymentDetails() {
   const router = useRouter();
   const theme = useTheme();
 
-  const nextPage = () => {
+  const { control, handleSubmit } = useForm<PaymentInfo>({
+    resolver: zodResolver(PaymentInfoSchema),
+  });
+
+  const nextPage = (data) => {
     //Submit:
 
     //Todo: Why is not navigating home
@@ -33,28 +44,42 @@ export default function PaymentDetails() {
       <Card>
         <Card.Title title="Payment details" titleVariant="titleLarge" />
         <Card.Content style={{ gap: 10 }}>
-          <TextInput
+          <ControlledInput
+            control={control}
+            name="number"
             label="Card number"
             placeholder="4242 4242 4242 4242"
             style={{ backgroundColor: theme.colors.background }}
           />
           <View style={{ flexDirection: "row", gap: 15 }}>
-            <TextInput
+            <ControlledInput
+              control={control}
+              name="expirationDate"
               label="Expiration date"
               placeholder="mm/yyyy"
-              style={{ backgroundColor: theme.colors.background, flex: 3 }}
             />
-            <TextInput
+            <ControlledInput
+              control={control}
+              name="securityCode"
               label="Security code"
-              style={{ backgroundColor: theme.colors.background, flex: 2 }}
             />
           </View>
 
-          <Checkbox.Item label="Save payment information" status="checked" />
+          <Controller
+            control={control}
+            name="saveInformation"
+            render={({ field: { value, onChange } }) => (
+              <Checkbox.Item
+                label="Save payment information"
+                status={value ? "checked" : "unchecked"}
+                onPress={() => onChange(!value)}
+              />
+            )}
+          />
         </Card.Content>
       </Card>
 
-      <Button mode="contained" onPress={nextPage}>
+      <Button mode="contained" onPress={handleSubmit(nextPage)}>
         Next
       </Button>
     </ScrollView>

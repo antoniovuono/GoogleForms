@@ -22,7 +22,7 @@ export default function ControlledInput({
         field: { value, onChange, onBlur },
         fieldState: { error, invalid },
       }) => (
-        <View>
+        <View style={{ flex: 1 }}>
           <TextInput
             {...TextInputProps}
             style={{ backgroundColor: theme.colors.background }}
