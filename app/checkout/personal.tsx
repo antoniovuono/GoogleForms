@@ -3,7 +3,7 @@ import React from "react";
 import { ScrollView, View } from "react-native";
 import { Button, Card, useTheme } from "react-native-paper";
 
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   PersonalInfoSchema,
@@ -24,8 +24,6 @@ export default function PersonalDetails() {
   });
 
   const nextPage = (data) => {
-    console.log("Form Fields:", data);
-
     router.push("/checkout/delivery");
   };
 
@@ -54,6 +52,7 @@ export default function PersonalDetails() {
             name="email"
             placeholder="hey@gmail.com"
             label="Email"
+            autoCapitalize="none"
           />
         </Card.Content>
       </Card>
