@@ -23,7 +23,7 @@ export default function PaymentDetails() {
   const nextPage = async (data: PaymentInfo) => {
     //Submit:
     setPayment(data);
-    const success = await onSubmitAll();
+    const success = await onSubmitAll(data);
 
     if (success) {
       //Todo: Why is not navigating home
