@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 const DeliveryInfoSchema = z.object({
-    city: z.string().min(1, { message: 'City is required!'}),
-    postalCode: z.string().min(1, { message: 'Postal Code is required!'}),
-    address: z.string().min(1, { message: 'Address is required!'}),
+    city: z.string().min(1),
+    postalCode: z.string(),
+    address: z.string(),
     shipping: z.enum(['free', 'fast', 'same_day'])
 });
 

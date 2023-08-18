@@ -1,9 +1,9 @@
 import { z } from "zod"
 
 const PaymentInfoSchema = z.object({
-    number: z.string().min(1, { message: "Card number is required!" }),
+    number: z.string(),
     expirationDate: z.string(),
-    securityCode: z.string(),
+    securityCode: z.string().length(3, { message: "Security code must have 3 digits!"}),
     saveInformation: z.boolean()
 });
 
